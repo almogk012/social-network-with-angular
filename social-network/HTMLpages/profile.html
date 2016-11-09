@@ -1,0 +1,119 @@
+<div class=" col-md-6 col-md-offset-3">
+
+    <!--<ul ng-repeat="file in files" style="list-style: none">-->
+        <!--<li >-->
+            <!--<img src="http://localhost:4730/uploads/{{file}}" >{{file}}-->
+        <!--</li>-->
+    <!--</ul>-->
+    <img id="imgProfile" ng-src="{{defaultImage}}"/>
+    <h3 style="text-transform: capitalize">{{Fname}} {{Lname}}</h3>
+
+    <!--<form  name="up.upload_form" style="border: 1px black solid">-->
+        <!--<div style="margin: 3px;">-->
+            <!--<label id="btnUpload1" for="my-file-selector">-->
+                <!--<input type="file" style="display:none;">Choose Profile Photo-->
+                <!--<span class="glyphicon glyphicon-level-up"></span>-->
+            <!--</label>-->
+            <!--<span class='label label-info' id="upload-file-info">{{tmp}}</span>-->
+        <!--</div>-->
+        <!--<div class="both"></div>-->
+        <!--<input type="file" ngf-select ng-model="up.file" name="file" ngf-pattern="'image/*'" accept="image/*"-->
+               <!--ngf-max-size="20MB" id="my-file-selector" style="display:none;"/>-->
+        <!--Image thumbnail:-->
+        <!--<img style="width:100px;" ng-show="!!up.file" ngf-thumbnail="up.file || '/thumb.jpg'"/>-->
+        <!--<i ng-show="up.upload_form.file.$error.required">*required</i><br>-->
+        <!--<i ng-show="up.upload_form.file.$error.maxSize">File too large-->
+            <!--{{up.file.size / 1000000|number:1}}MB: max 20M</i>-->
+        <!--<button type="submit" id="btnUpload2" ng-click="up.submit()">Upload <span-->
+                <!--class="glyphicon glyphicon-open-file"></span></button>-->
+        <!--&lt;!&ndash;  Multiple files-->
+         <!--<div class="button" ngf-select ng-model="up.files" ngf-multiple="true">Select</div>-->
+         <!--Drop files: <div ngf-drop ng-model="up.files" class="drop-box">Drop</div> &ndash;&gt;-->
+        <!--<p>{{up.progress}}</p>-->
+    <!--</form>-->
+    <div id="footNav">
+        <ul class="nav nav-tabs" role="navigation">
+            <li ng-class=" {active:tab === 2}"><a class="text-in-navbar" ng-click="selectedTab(2)"><span
+                    class="glyphicon glyphicon-info-sign"></span> About</a></li>
+            <li ng-class=" {active:tab === 1}"><a class="text-in-navbar" ng-click="selectedTab(1)"><span
+                    class="glyphicon glyphicon-comment"></span> TimeLine</a></li>
+            <li ng-class=" {active:tab === 3}"><a class="text-in-navbar" ng-click="selectedTab(3)"><span
+                    class="glyphicon glyphicon-picture"></span> My Photos</a></li>
+            <li ng-class=" {active:tab === 4}" ng-click="showInterests()"><a class="text-in-navbar"
+                                                                             ng-click="selectedTab(4) "><span
+                    class="glyphicon glyphicon-th-list"></span> Interests</a></li>
+        </ul>
+    </div>
+    <div ng-show="tab === 1">
+        <div id="tb">
+            <table class="table ">
+                <thead>
+                <tr>
+                    <th style="width: 5%">#</th>
+                    <th style="width: 23%">Date</th>
+                    <th style="width: 12%">From</th>
+                    <th style="width: 60%;text-align:center">Text</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr class="active" ng-repeat="msg in data track by $index">
+                    <td style="width: 5%">{{$index+1}}</td>
+                    <td style="width: 23%">{{msg.date | date : "short"}}</td>
+                    <td style="width: 12%">{{msg.senderMsg}}</td>
+                    <td style="width: 60%">{{msg.messageFromUser}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div ng-show="tab === 2">
+        <form id="addAboutForm" name="form" role="form" ng-submit="form.$valid && FillAbout(textAbout)" novalidate>
+            <div>
+                <div>
+                    <p><h5>Hello ! , {{Fname}} </h5>I see you here for the first time</p>
+                    <p>Lets fill some information about you</p>
+                </div>
+                <textarea id="aboutInput" class="form-control" type="text" name="about" ng-model="textAbout"
+                          ng-minlength="1" ng-maxlength="255" rows="5" required></textarea>
+                <div class="lengthInput">{{form.about.$viewValue.length || 0}}/255</div>
+                <button type="submit" ng-submit="FillAbout(textAbout)" class="btn btn-primary">Add about</button>
+                <span ng-show="form.about.$dirty && form.about.$error.required" class="help-block"></span>
+            </div>
+        </form>
+        <div id="resultAbout">{{about}}</div>
+    </div>
+
+    <div ng-show="tab === 3">
+        <div style="height: 269px">
+            <div uib-carousel active="active" interval="myInterval" no-wrap="noWrapSlides">
+                <div uib-slide ng-repeat="slide in slides track by slide.id" index="slide.id">
+                    <img ng-src="{{slide.image}}" style="margin:auto;border: 2px black solid">
+                    <div class="carousel-caption">
+                        <h4>Photo {{slide.id}}</h4>
+                        <p>{{slide.text}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button type="button" class="btn btn-info" ng-click="addSlide()">Add Slide</button>
+
+            </div>
+            <div class="col-md-6">
+                Interval, in milliseconds: <input type="number" class="form-control" ng-model="myInterval">
+                <br/>Enter a negative number or 0 to stop the interval.
+            </div>
+        </div>
+    </div>
+
+    <div ng-show="tab === 4" id="chkboxInterests">
+        <li id="listOfInterests" ng-repeat="item in Interests">
+            <div>
+                <input type="checkbox" id="chkbox"/>
+                <label> {{item.name}}</label>
+            </div>
+        </li>
+    </div>
+</div>

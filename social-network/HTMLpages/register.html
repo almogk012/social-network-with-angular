@@ -1,0 +1,40 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Register</h2>
+    <form id="formReg" name="form" ng-submit="register()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.firstName.$dirty && form.firstName.$error.required }">
+            <label for="username">First name</label>
+            <input type="text" name="firstName" id="firstName" class="form-control" ng-model="user.firstName"
+                   ng-minlength="1" ng-maxlength="15" required placeholder="Enter up to 15 characters"/>
+            <span ng-show="form.firstName.$dirty && form.firstName.$error.required" class="help-block">First name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.lastName.$dirty && form.lastName.$error.required }">
+            <label for="username">Last name</label>
+            <input type="text" name="lastName" id="Text1" class="form-control" ng-model="user.lastName" ng-minlength="1"
+                   ng-maxlength="15" required placeholder="Enter up to 15 characters"/>
+            <span ng-show="form.lastName.$dirty && form.lastName.$error.required" class="help-block">Last name is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="user.username" required/>
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="user.password"
+                   required/>
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Register</button>
+            <img ng-if="dataLoading" width="14" height="14"
+                 src="http://i.imgur.com/7ZMlu3C.gif" data-original="http://oi42.tinypic.com/9sqmaf.jpg">
+            <a ui-sref="login" class="btn btn-link">Cancel</a>
+        </div>
+    </form>
+    <div class="alert alert-warning own-alerts" ng-show="warningMsgReg">
+        <strong style="color:red;">Error!</strong> {{errorReg}}
+    </div>
+    <uib-alert class="own-alerts" ng-show="success" type="success">
+        Registration is completed <strong style="color:green;">Successfully!</strong>
+    </uib-alert>
+</div>

@@ -1,0 +1,14 @@
+{
+  "name": "first-express-app",
+  "description": "a fine piece of express art",
+  "version": "0.0.1",
+  "dependencies": {
+    "body-parser": "^1.15.2",
+    "express": "^3.21.2",
+    "formidable": "^1.0.17",
+    "lodash": "^4.15.0"
+  },
+  "devDependencies": {
+    "angular-alert-provider": "^0.1.0"
+  }
+}

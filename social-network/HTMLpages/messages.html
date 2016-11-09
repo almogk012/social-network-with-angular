@@ -1,0 +1,18 @@
+
+<h2>Messages</h2>
+<form name="form" ng-submit="form.$valid && Send(userToSend,message)" novalidate>
+    <div >
+        <label>Choose User To send A Message : </label>
+          <select id="selectUserMsg" name="id" ng-model="userToSend" ng-options="u.firstname for u in users"
+                                                                required></select>
+
+        <textarea id="msgInput" name="message1" ng-model="message" type="text"
+               ng-minlength="1" ng-maxlength="200" required rows="3" class="form-control form-textarea"></textarea>
+        <button type="submit" ng-submit="Send(userToSend,message)" class="btn btn-primary">Send</button>
+        <span ng-show="form.message1.$dirty && form.message1.$error.required" class="help-block"></span>
+        <div class="lengthInput">{{form.message1.$viewValue.length || 0}}/200</div>
+    </div>
+</form>
+<div id="msgToSend" class="alert alert-success" ng-show="successMsgSend">
+    <strong style="color:green;">Success to send !</strong> {{successToSend}}
+</div>

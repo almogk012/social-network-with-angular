@@ -1,0 +1,26 @@
+<div class="col-md-6 col-md-offset-3">
+    <h2>Login</h2>
+    <form id="formLog" name="form" ng-submit="login()" role="form">
+        <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
+            <label for="username">Username</label>
+            <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
+            <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
+        </div>
+        <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+            <label for="password">Password</label>
+            <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
+            <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
+        </div>
+        <div class="form-actions">
+            <button type="submit" ng-disabled="form.$invalid || dataLoading" class="btn btn-primary">Login</button>
+            <img ng-if="dataLoading" width="14" height="14" src="http://i.imgur.com/7ZMlu3C.gif" data-original="http://oi42.tinypic.com/9sqmaf.jpg" />
+            <a ui-sref="register" class="btn btn-link">Register</a>
+        </div>
+    </form>
+    <div class="alert alert-warning" ng-show="warningMsg" style="background-color: white;font-size: 15px;opacity: 0.6;margin-top: 5px;">
+         <strong style="color:red;" class="glyphicon glyphicon-remove-sign"></strong> Error <br/>  {{errorLogIn}}
+    </div>
+    <div class="alert alert-success" ng-show="successMsg" style="background-color: white;font-size: 15px;opacity: 0.6;margin-top: 5px;">
+        <strong style="color:green;"><span class="glyphicon glyphicon-ok-sign"></span></strong> Success <br/> {{successLogIn}}
+    </div>
+</div>

@@ -1,0 +1,25 @@
+<ul class="listFriendsRequest col-md-3 col-md-offset-4">
+    <h3 style="text-decoration: underline;">People You May Know</h3>
+    <li ng-repeat="user in users">
+        <p>{{user.firstname}} {{user.lastname}}
+            <button  class="btn btn-primary btn-addFriend-confirm"
+                    popover-placement="right" popover-animation="true" uib-popover="Sended !"
+                     ng-disabled="user.disabled" ng-click="addFriend(user)">
+                <span class="glyphicon glyphicon-plus-sign "></span> Add Friend
+            </button>
+        </p>
+    </li>
+</ul>
+<ul class="listFriendsRequest col-md-3 col-md-offset-4">
+    <div style="clear: both"></div>
+    <h3 style="text-decoration: underline">Friends Request</h3>
+    <li ng-repeat="user in allReqests">
+        <p>{{user.firstname}} {{user.lastname}}
+            <button ng-disabled="user.disabled" class="btn btn-primary  btn-addFriend-confirm"
+                    popover-placement="right" popover-animation="true" uib-popover="New Friend !"
+                    ng-click="addFriendToMyFriends(user)">
+                <span class="glyphicon glyphicon-plus-sign"></span> Confirm
+            </button>
+        </p>
+    </li>
+</ul>
